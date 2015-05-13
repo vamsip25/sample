@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+					xmlns:tns="http://test.niit.org/guest/definitions" 
+					xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+					xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+					name="guest" 
+					xmlns:gt="http://test.niit.org/guest/schemas" 
+					targetNamespace="http://test.niit.org/guest/definitions" 
+					xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+					xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+  	
+  	<wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://test.niit.org/guest/schemas" schemaLocation="guest.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    
+  	<wsdl:message name="GuestDetailsRequest">
+        <wsdl:part element="gt:GuestDetailsRequest" name="GuestDetailsRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GuestDetailsResponse">
+        <wsdl:part element="gt:GuestDetailsResponse" name="GuestDetailsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GuestLNameChangeRequest">
+        <wsdl:part element="gt:GuestLNameChangeRequest" name="GuestLNameChangeRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GuestLNameChangeResponse">
+        <wsdl:part element="gt:GuestLNameChangeResponse" name="GuestLNameChangeResponse"/>
+    </wsdl:message>
+    
+	<wsdl:portType name="guest">
+		<wsdl:operation name="getGuestDetails">
+			<wsdl:input message="tns:GuestDetailsRequest" name="GuestDetailsRequest"/>
+			<wsdl:output message="tns:GuestDetailsResponse" name="GuestDetailsResponse"/>
+    	</wsdl:operation>
+    
+	    <wsdl:operation name="updateLastName">
+			<wsdl:input message="tns:GuestLNameChangeRequest" name="GuestLNameChangeRequest"/>
+			<wsdl:output message="tns:GuestLNameChangeResponse" name="GuestLNameChangeResponse"/>
+	    </wsdl:operation>
+	</wsdl:portType>
+  
+  
+  <wsdl:binding name="guestSOAP" type="tns:guest">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getGuestDetails">
+      <soap:operation soapAction="http://localhost:8080/guestService/getGuestDetails"/>
+      <wsdl:input name="GuestDetailsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GuestDetailsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    
+    <wsdl:operation name="updateLastName">
+      <soap:operation soapAction="http://localhost:8080/guestService/updateLastName"/>
+      <wsdl:input name="GuestLNameChangeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GuestLNameChangeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    
+  </wsdl:binding>
+  
+  
+  <wsdl:service name="GuestService">
+    <wsdl:port binding="tns:guestSOAP" name="guestSOAP">
+      <soap:address location="http://localhost:8080/GuestWS/guestService/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

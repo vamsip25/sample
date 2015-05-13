@@ -1,0 +1,51 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified"
+        targetNamespace="http://test.niit.org/guest/schemas"
+        xmlns:gt="http://test.niit.org/guest/schemas">
+	
+	<xs:element name="GuestDetailsRequest">
+	<xs:complexType>
+		<xs:all>
+			<xs:element ref="gt:GuestId"></xs:element>
+		</xs:all>
+	</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GuestDetailsResponse">
+	<xs:complexType>
+		<xs:all>
+			<xs:element ref="gt:GuestId"></xs:element>
+			<xs:element ref="gt:FirstName"></xs:element>
+			<xs:element ref="gt:LastName"></xs:element>
+		</xs:all>
+	</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="GuestLNameChangeRequest">
+	<xs:complexType>
+            <xs:sequence>
+            	<xs:element ref="gt:GuestId"/>
+            	<xs:element ref="gt:NewLastName"/>
+            </xs:sequence>
+	</xs:complexType>
+    </xs:element>
+    
+    <xs:element name="GuestLNameChangeResponse">
+	<xs:complexType>
+		<xs:all>
+			<xs:element ref="gt:GuestId"></xs:element>
+			<xs:element ref="gt:StatusCode"></xs:element>
+			<xs:element ref="gt:StatusDesc"></xs:element>
+		</xs:all>
+	</xs:complexType>
+	</xs:element>
+	
+    
+    <xs:element name="GuestId" type="xs:integer"/>
+    <xs:element name="FirstName" type="xs:string"/>
+    <xs:element name="LastName" type="xs:string"/>
+    <xs:element name="StatusCode" type="xs:string"/>
+    <xs:element name="StatusDesc" type="xs:string"/>
+    <xs:element name="NewLastName" type="xs:string"/>
+
+</xs:schema>
